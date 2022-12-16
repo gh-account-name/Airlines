@@ -46,7 +46,7 @@
 </style>
 <nav class="navbar bg-light">
     <div class="container-fluid container">
-        <a class="navbar-brand" href="#"><img src="{{asset('public/storage/logo.png')}}" alt="logo"></a>
+        <a class="navbar-brand" href="{{route('mainPage')}}"><img src="{{asset('public/storage/logo.png')}}" alt="logo"></a>
         <button class="navbar-toggler-custom" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <img src="{{asset('public/storage/navbutton.svg')}}" alt="">
         </button>
@@ -57,7 +57,7 @@
             <div class="offcanvas-body p-5 pt-0">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link" aria-current="page" href="#">
+                        <a class="nav-link" aria-current="page" href="{{route('mainPage')}}">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.20832 5.20832L14.7917 14.7917M14.7917 5.20832L5.20832 14.7917M17.4583 12.125L12.1333 17.45C10.9667 18.6167 9.04999 18.6167 7.87499 17.45L2.54999 12.125C1.38332 10.9583 1.38332 9.04166 2.54999 7.86666L7.87499 2.54166C9.04165 1.37499 10.9583 1.37499 12.1333 2.54166L17.4583 7.86666C18.625 9.04166 18.625 10.9583 17.4583 12.125Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -65,7 +65,7 @@
                     </li>
                     @guest()
                         <li class="nav-item d-flex justify-content-between">
-                            <a class="nav-link" aria-current="page" href="#">
+                            <a class="nav-link" aria-current="page" href="{{route('authPage')}}">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.41669 6.30001C7.67502 3.30001 9.21669 2.07501 12.5917 2.07501H12.7C16.425 2.07501 17.9167 3.56668 17.9167 7.29168V12.725C17.9167 16.45 16.425 17.9417 12.7 17.9417H12.5917C9.24169 17.9417 7.70002 16.7333 7.42502 13.7833M1.66669 10H12.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M10.5417 7.20834L13.3334 10L10.5417 12.7917" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -73,7 +73,7 @@
                                 Авторизация</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">
+                            <a class="nav-link" aria-current="page" href="{{route('regPage')}}">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.99998 9.99999C11.105 9.99999 12.1649 9.561 12.9463 8.7796C13.7277 7.9982 14.1666 6.93839 14.1666 5.83332C14.1666 4.72825 13.7277 3.66845 12.9463 2.88704C12.1649 2.10564 11.105 1.66666 9.99998 1.66666C8.89491 1.66666 7.8351 2.10564 7.0537 2.88704C6.2723 3.66845 5.83331 4.72825 5.83331 5.83332C5.83331 6.93839 6.2723 7.9982 7.0537 8.7796C7.8351 9.561 8.89491 9.99999 9.99998 9.99999V9.99999Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M16.0083 13.1167L13.0583 16.0667C12.9417 16.1833 12.8333 16.4 12.8083 16.5583L12.65 17.6833C12.5917 18.0917 12.875 18.375 13.2833 18.3167L14.4083 18.1583C14.5667 18.1333 14.7917 18.025 14.9 17.9083L17.85 14.9583C18.3583 14.45 18.6 13.8583 17.85 13.1083C17.1083 12.3667 16.5167 12.6083 16.0083 13.1167V13.1167Z" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>

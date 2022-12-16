@@ -69,13 +69,13 @@
         <div class="container">
             <h2 style="color: #265BE3;" class="d-flex align-items-center justify-content-between mt-5">Все рейсы <span class="decorLine"></span></h2>
             <table class="w-100">
-                <tr style="font-weight: normal; color: #265BE3; border-bottom: 2px #265BE3 solid">
+                <tr style="font-weight: normal; color: #265BE3; border-bottom: 2px #265BE3 solid; line-height: 3rem">
                     <td>откуда</td>
                     <td>куда</td>
                     <td>дата и время вылета</td>
                     <td>цена билета</td>
                 </tr>
-                <tr>
+                <tr style="line-height: 3rem">
                     <td>Нижний Новгород</td>
                     <td>Москва</td>
                     <td>29.09.2022 года</td>
