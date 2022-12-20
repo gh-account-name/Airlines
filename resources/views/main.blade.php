@@ -13,7 +13,7 @@
         }
 
         .searchTickets .btn{
-            background: #F4C82C;
+            /* background: #F4C82C; */
             border-radius: 0.3125rem;
             height: 4.25rem;
             margin-top: auto;
@@ -54,7 +54,7 @@
                     <input type="date" class="form-control" id="date" name="date">
                 </div>
                 <div class="mb-3 col-2 d-flex align-items-end">
-                    <button type="submit" class="btn">найти</button>
+                    <button type="submit" class="btn btn-warning">найти</button>
                 </div>
             </form>
         </div>
@@ -62,7 +62,20 @@
     <div class="popularDirections">
         <div class="container">
             <h2 style="color: #265BE3;" class="d-flex align-items-center justify-content-between mt-5">Популярные направления <span class="decorLine"></span></h2>
-            <div></div>
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                </div>
+                <div class="col">
+                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                </div>
+                <div class="col">
+                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                </div>
+                <div class="col">
+                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="allFlights">

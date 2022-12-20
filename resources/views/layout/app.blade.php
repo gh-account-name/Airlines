@@ -10,6 +10,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <script src="{{asset('public\js\vue.global.js')}}"></script>
 <style>
     @font-face {
         font-family: Inter;

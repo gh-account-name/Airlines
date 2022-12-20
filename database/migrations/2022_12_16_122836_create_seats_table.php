@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Airplane::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->integer('seat');
-            $table->string('status')->default('свободно');
             $table->timestamps();
         });
     }
