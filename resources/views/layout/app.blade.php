@@ -10,14 +10,20 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <script src="{{asset('public\js\jquery-3.6.2.js')}}"></script>
     <script src="{{asset('public\js\vue.global.js')}}"></script>
 <style>
     @font-face {
         font-family: Inter;
-        src: url('public/fonts/Inter-Regular.ttf');
+        src: url({{asset('public/fonts/Inter-Regular.ttf')}});
     }
+
     body{
         font-family: Inter;
+    }
+
+    h1, h2, h3, h4, h5{
+        color: #265BE3;
     }
 </style>
 @include('layout.navbar')

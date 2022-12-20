@@ -39,7 +39,7 @@
 
     <div class="searchTickets d-flex align-items-center">
         <div class="container">
-            <h1 style="font-size: 4rem" class="mb-3">Поиск авиабилетов</h1>
+            <h1 style="font-size: 4rem" class="mb-3 text-white">Поиск авиабилетов</h1>
             <form action="" class="row">
                 <div class="mb-3 col-3">
                     <label for="from" class="form-label">откуда</label>
@@ -61,16 +61,16 @@
     </div>
     <div class="popularDirections">
         <div class="container">
-            <h2 style="color: #265BE3;" class="d-flex align-items-center justify-content-between mt-5">Популярные направления <span class="decorLine"></span></h2>
+            <h2 class="d-flex align-items-center justify-content-between mt-5">Популярные направления <span class="decorLine"></span></h2>
             <div class="row">
                 <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                    <a href="#" class="direction d-block" style="background: url('https://realrussia.co.uk/portals/0/images/Moscow%20St%20Basils%20Cathedral.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
                 </div>
                 <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                    <a href="#" class="direction d-block" style="background: url('https://tripplanet.ru/wp-content/uploads/europe/russia/st-petersburg/saint-isaacs-cathedral.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
                 </div>
                 <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                    <a href="#" class="direction d-block" style="background: url('https://planetofhotels.com/guide/sites/default/files/styles/node__blog_post__bp_banner/public/2021-06/Central-District-of-Sochi.jpeg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
                 </div>
                 <div class="col">
                     <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
@@ -80,7 +80,7 @@
     </div>
     <div class="allFlights">
         <div class="container">
-            <h2 style="color: #265BE3;" class="d-flex align-items-center justify-content-between mt-5">Все рейсы <span class="decorLine"></span></h2>
+            <h2 class="d-flex align-items-center justify-content-between mt-5">Все рейсы <span class="decorLine"></span></h2>
             <table class="w-100">
                 <tr style="font-weight: normal; color: #265BE3; border-bottom: 2px #265BE3 solid; line-height: 3rem">
                     <td>откуда</td>

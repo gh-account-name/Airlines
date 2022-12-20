@@ -51,6 +51,14 @@
             <img src="{{asset('public/storage/navbutton.svg')}}" alt="">
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            @auth()
+                <div class="userIcon p-5 pb-0" style="display: flex; align-items: center; justify-content:flex-start;">
+                    <span class="d-flex justify-content-center align-items-center" style="background: white url('{{asset('public/storage/user-icon.png')}}') center no-repeat;background-size: cover; border-radius: 1000px; width: 60px; height: 60px;">
+                        {{-- <img style="width: 100%;" src="{{asset('public\storage\user-icon.png')}}" alt="Avatar"> --}}
+                    </span>
+                    <p class="text-white h4" style="margin:0 0 0 1rem; font-weight: bold;">{{\Illuminate\Support\Facades\Auth::user()->login}}</p>
+                </div>
+            @endauth
             <div class="offcanvas-header p-5">
                 <h5 class="offcanvas-title" style="cursor: pointer; color: white; font-weight: 700; font-size: 1.5rem" data-bs-dismiss="offcanvas" id="offcanvasNavbarLabel">Меню</h5>
             </div>
@@ -92,17 +100,9 @@
                                 </svg>                                                                 
                                 Мои билеты</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{route('logout')}}">
-                                <svg style="width: 30px" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.41667 6.5639C7.675 3.5639 9.21667 2.3389 12.5917 2.3389H12.7C16.425 2.3389 17.9167 3.83056 17.9167 7.55556V12.9889C17.9167 16.7139 16.425 18.2056 12.7 18.2056H12.5917C9.24167 18.2056 7.7 16.9972 7.425 14.0472M1.66667 10.2639H12.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M4.45834 7.48057L1.66667 10.2722L4.45834 13.0639" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>                                                                                                  
-                                Выйти</a>
-                        </li>
                        @if(\Illuminate\Support\Facades\Auth::user()->role === 'admin')
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
+                                <a class="nav-link active" aria-current="page" href="{{route('citiesPage')}}">
                                     <svg style="width: 30px" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10.8334 18.9583H4.16669C2.15002 18.9583 1.04169 17.85 1.04169 15.8333V9.16667C1.04169 7.15 2.15002 6.04167 4.16669 6.04167H8.33335C8.67502 6.04167 8.95835 6.325 8.95835 6.66667V15.8333C8.95835 17.15 9.51669 17.7083 10.8334 17.7083C11.175 17.7083 11.4584 17.9917 11.4584 18.3333C11.4584 18.675 11.175 18.9583 10.8334 18.9583ZM4.16669 7.29167C2.85002 7.29167 2.29169 7.85 2.29169 9.16667V15.8333C2.29169 17.15 2.85002 17.7083 4.16669 17.7083H8.16669C7.86669 17.2167 7.70835 16.5917 7.70835 15.8333V7.29167H4.16669Z" fill="white"/>
                                         <path d="M8.33335 7.29167H4.16669C3.82502 7.29167 3.54169 7.00833 3.54169 6.66667V5C3.54169 3.73333 4.56669 2.70833 5.83335 2.70833H8.42502C8.61669 2.70833 8.80002 2.8 8.91669 2.95C9.03335 3.10833 9.07502 3.30833 9.02502 3.49167C8.97502 3.675 8.95835 3.88333 8.95835 4.16667V6.66667C8.95835 7.00833 8.67502 7.29167 8.33335 7.29167ZM4.79169 6.04167H7.70835V3.95833H5.83335C5.25835 3.95833 4.79169 4.425 4.79169 5V6.04167ZM11.6667 11.4583C11.325 11.4583 11.0417 11.175 11.0417 10.8333V6.66667C11.0417 6.325 11.325 6.04167 11.6667 6.04167C12.0084 6.04167 12.2917 6.325 12.2917 6.66667V10.8333C12.2917 11.175 12.0084 11.4583 11.6667 11.4583ZM15 11.4583C14.6584 11.4583 14.375 11.175 14.375 10.8333V6.66667C14.375 6.325 14.6584 6.04167 15 6.04167C15.3417 6.04167 15.625 6.325 15.625 6.66667V10.8333C15.625 11.175 15.3417 11.4583 15 11.4583ZM15 18.9583H11.6667C11.325 18.9583 11.0417 18.675 11.0417 18.3333V15C11.0417 14.2 11.7 13.5417 12.5 13.5417H14.1667C14.9667 13.5417 15.625 14.2 15.625 15V18.3333C15.625 18.675 15.3417 18.9583 15 18.9583ZM12.2917 17.7083H14.375V15C14.375 14.8833 14.2834 14.7917 14.1667 14.7917H12.5C12.3834 14.7917 12.2917 14.8833 12.2917 15V17.7083ZM5.00002 14.7917C4.65835 14.7917 4.37502 14.5083 4.37502 14.1667V10.8333C4.37502 10.4917 4.65835 10.2083 5.00002 10.2083C5.34169 10.2083 5.62502 10.4917 5.62502 10.8333V14.1667C5.62502 14.5083 5.34169 14.7917 5.00002 14.7917Z" fill="white"/>
@@ -141,6 +141,15 @@
                                     Пользователи</a>
                             </li>
                        @endif
+
+                       <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{route('logout')}}">
+                            <svg style="width: 30px" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.41667 6.5639C7.675 3.5639 9.21667 2.3389 12.5917 2.3389H12.7C16.425 2.3389 17.9167 3.83056 17.9167 7.55556V12.9889C17.9167 16.7139 16.425 18.2056 12.7 18.2056H12.5917C9.24167 18.2056 7.7 16.9972 7.425 14.0472M1.66667 10.2639H12.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4.45834 7.48057L1.66667 10.2722L4.45834 13.0639" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>                                                                                                  
+                            Выйти</a>
+                        </li>
                    @endauth
                 </ul>
             </div>

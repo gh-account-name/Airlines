@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,24 @@ Route::post('/registration', [UserController::class, 'register'])->name('registe
 Route::post('/authorisation', [UserController::class, 'auth'])->name('auth');
 
 Route::get('/logout', [UserController::class,  'logout'])->name('logout');
+
+
+// Миддлвар
+
+Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
+
+    // Страницы
+
+    Route::get('/cities', [PageController::class, 'citiesPage'])->name('citiesPage');
+
+    // Функции
+
+    Route::get('/get/cities', [CityController::class, 'getCities'])->name('getCities');
+
+    Route::post('/add/city', [CityController::class, 'addCity'])->name('addCity');
+
+    Route::post('/edit/city/{city?}', [CityController::class, 'editCity'])->name('editCity');
+
+    Route::post('/delete/city/{city?}', [CityController::class, 'deleteCity'])->name('deleteCity');
+
+});

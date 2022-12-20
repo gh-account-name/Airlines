@@ -24,7 +24,7 @@
     </style>
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh" id="reg">
         <form class="col-4" @submit.prevent = "Registration" id="regForm" method="POST">
-            <h1 style="color: #265BE3;" class="d-flex align-items-center justify-content-between mb-4">Регистрация <span style="margin-left: 7%" class="decorLine"></span></h1>
+            <h1 class="d-flex align-items-center justify-content-between mb-4">Регистрация <span style="margin-left: 7%" class="decorLine"></span></h1>
 
             <div class="mb-4">
                 <input type="text" class="form-control" id="fio" name="fio" placeholder="ФИО" :class="errors.fio ? 'is-invalid' : '' ">

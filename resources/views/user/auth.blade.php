@@ -35,7 +35,7 @@
             </div>
             @endif
 
-            <h1 style="color: #265BE3;" class="d-flex align-items-center justify-content-between mb-4">Авторизация <span style="margin-left: 7%" class="decorLine"></span></h1>
+            <h1 class="d-flex align-items-center justify-content-between mb-4">Авторизация <span style="margin-left: 7%" class="decorLine"></span></h1>
 
             <div class="mb-4">
                 <input type="text" class="form-control @error('login') is-invalid @enderror" id="login" name="login" value="{{old('login')}}" placeholder="логин">
