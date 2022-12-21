@@ -27,4 +27,8 @@ class PageController extends Controller
     public function airplanesPage(){
         return view('admin.airplanes');
     }
+
+    public function usersPage(){
+        return view('admin.users');
+    }
 }

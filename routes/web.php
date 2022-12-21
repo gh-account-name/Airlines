@@ -45,6 +45,9 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
 
     Route::get('/airplanes', [PageController::class, 'airplanesPage'])->name('airplanesPage');
 
+    Route::get('/users', [PageController::class, 'usersPage'])->name('usersPage');
+
+
     // Функции
 
     Route::get('/get/cities', [CityController::class, 'getCities'])->name('getCities');
@@ -62,5 +65,12 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
     Route::post('/edit/airplane/{airplane?}', [AirplaneController::class, 'editAirplane'])->name('editAirplane');
 
     Route::post('/delete/airplane/{airplane?}', [AirplaneController::class, 'deleteAirplane'])->name('deleteAirplane');
+
+    Route::get('/get/users', [UserController::class, 'getUsers'])->name('getUsers');
+
+    Route::post('/edit/user/{user?}', [UserController::class, 'editUser'])->name('editUser');
+
+    Route::post('/delete/user/{user?}', [UserController::class, 'deleteUser'])->name('deleteUser');
+    
 
 });

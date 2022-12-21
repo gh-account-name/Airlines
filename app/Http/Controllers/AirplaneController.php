@@ -6,7 +6,6 @@ use App\Models\Airplane;
 use App\Http\Controllers\Controller;
 use App\Models\Seat;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AirplaneController extends Controller
