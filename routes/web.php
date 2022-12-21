@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AirplaneController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
@@ -42,6 +43,8 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
 
     Route::get('/cities', [PageController::class, 'citiesPage'])->name('citiesPage');
 
+    Route::get('/airplanes', [PageController::class, 'airplanesPage'])->name('airplanesPage');
+
     // Функции
 
     Route::get('/get/cities', [CityController::class, 'getCities'])->name('getCities');
@@ -51,5 +54,13 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
     Route::post('/edit/city/{city?}', [CityController::class, 'editCity'])->name('editCity');
 
     Route::post('/delete/city/{city?}', [CityController::class, 'deleteCity'])->name('deleteCity');
+
+    Route::get('/get/airplanes', [AirplaneController::class, 'getAirplanes'])->name('getAirplanes');
+    
+    Route::post('/add/airplane', [AirplaneController::class, 'addAirplane'])->name('addAirplane');
+
+    Route::post('/edit/airplane/{airplane?}', [AirplaneController::class, 'editAirplane'])->name('editAirplane');
+
+    Route::post('/delete/airplane/{airplane?}', [AirplaneController::class, 'deleteAirplane'])->name('deleteAirplane');
 
 });
