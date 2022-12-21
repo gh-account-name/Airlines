@@ -145,6 +145,7 @@
                     errors:[],
                     cities:[],
                     message:'',
+                    isModalOpen: false,
                 }
             },
 
@@ -168,18 +169,12 @@
 
                     if(response.status === 403){
                         this.errors = await response.json();
-                        // setTimeout(() => {
-                        //     this.errors = [];
-                        // }, 3000);
                     }
 
                     if(response.status === 200){
                         form.reset();
                         $('#addModal').modal('hide');
                         this.message = await response.json();
-                        $('#messageModal').on('shown.bs.modal', function (e) {
-                            $(".modal-backdrop").css({ opacity: 0 });
-                        });
                         $('#messageModal').modal('show');
                         this.getCities();
                     }
@@ -198,18 +193,15 @@
 
                     if(response.status === 403){
                         this.errors = await response.json();
-                        // setTimeout(() => {
-                        //     this.errors = [];
-                        // }, 3000);
+                        setTimeout(() => {
+                            this.errors = [];
+                        }, 3000);
                     }
 
                     if(response.status === 200){
                         form.reset();
                         $(`#editModal_${id}`).modal('hide');
                         this.message = await response.json();
-                        $('#messageModal').on('shown.bs.modal', function (e) {
-                            $(".modal-backdrop").css({ opacity: 0 });
-                        });
                         $('#messageModal').modal('show');
                         this.getCities();
                     }
@@ -226,9 +218,6 @@
                     if(response.status === 200){
                         $(`#deleteModal_${id}`).modal('hide');
                         this.message = await response.json();
-                        $('#messageModal').on('shown.bs.modal', function (e) {
-                            $(".modal-backdrop").css({ opacity: 0 });
-                        });
                         $('#messageModal').modal('show');
                         this.getCities();
                     }
@@ -238,7 +227,11 @@
 
             mounted(){
                 this.getCities();
-            }
+                $('#messageModal').on('shown.bs.modal', function (e) {
+                    $(".modal-backdrop").css({ opacity: 0 });
+                });
+            },
+
         }
 
         Vue.createApp(Cities).mount('#citiesPage');
