@@ -3,6 +3,7 @@
 use App\Http\Controllers\AirplaneController;
 use App\Http\Controllers\AirportController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\FlightController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,8 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
 
     Route::get('/airports', [PageController::class, 'airportsPage'])->name('airportsPage');
 
+    Route::get('/flights', [PageController::class, 'flightsPage'])->name('flightsPage');
+
 
     // Функции
 
@@ -82,5 +85,13 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
     Route::post('/edit/airport/{airport?}', [AirportController::class, 'editAirport'])->name('editAirport');
 
     Route::post('/delete/airport/{airport?}', [AirportController::class, 'deleteAirport'])->name('deleteAirport');
+
+    Route::get('/get/flights', [FlightController::class, 'getFlights'])->name('getFlights');
+
+    Route::post('/add/flight', [FlightController::class, 'addFlight'])->name('addFlight');
+
+    Route::post('/edit/flight/{flight?}', [FlightController::class, 'editFlight'])->name('editFlight');
+
+    Route::post('/delete/flight/{flight?}', [FlightController::class, 'deleteFlight'])->name('deleteFlight');
 
 });
