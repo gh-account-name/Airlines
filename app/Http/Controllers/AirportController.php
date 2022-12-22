@@ -5,82 +5,58 @@ namespace App\Http\Controllers;
 use App\Models\Airport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AirportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function getAirports(){
+        $airports = Airport::with('city')->get();
+        return response()->json(['airports'=>$airports], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function addAirport(Request $request){
+        $validation = Validator::make($request->all(),[
+            'title'=>['required'],
+            'city'=>['required'], 
+        ],[
+            'title.required' => 'Обязательное поле для заполнения',
+            'city.required' => 'Обязательное поле для заполнения',
+        ]);
+
+        if($validation->fails()){
+            return response()->json($validation->errors(), 403);
+        }
+
+        $airport = new Airport();
+        $airport->title = $request->title;
+        $airport->city_id = $request->city;
+        $airport->save();
+
+        return response()->json('Аэропорт ' . $request->title . ' добавлен', 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function editAirport(Request $request, Airport $airport){
+        $validation = Validator::make($request->all(),[
+            'title'=>['required'],
+            'city'=>['required'], 
+        ],[
+            'title.required' => 'Обязательное поле для заполнения',
+            'city.required' => 'Обязательное поле для заполнения',
+        ]);
+
+        if($validation->fails()){
+            return response()->json($validation->errors(), 403);
+        }
+
+        $airport->title = $request->title;
+        $airport->city_id = $request->city;
+        $airport->update();
+
+        return response()->json('Аэропорт ' . $airport->title . ' обновлён', 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Airport $airport)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Airport $airport)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Airport $airport)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Airport  $airport
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Airport $airport)
-    {
-        //
+    public function deleteAirport(Airport $airport){
+        $airport->delete();
+        return response()->json('Аэропорт ' . $airport->title . ' удалён', 200);
     }
 }

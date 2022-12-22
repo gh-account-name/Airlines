@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AirplaneController;
+use App\Http\Controllers\AirportController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
@@ -47,6 +48,8 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
 
     Route::get('/users', [PageController::class, 'usersPage'])->name('usersPage');
 
+    Route::get('/airports', [PageController::class, 'airportsPage'])->name('airportsPage');
+
 
     // Функции
 
@@ -72,5 +75,12 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
 
     Route::post('/delete/user/{user?}', [UserController::class, 'deleteUser'])->name('deleteUser');
     
+    Route::get('/get/airports', [AirportController::class, 'getAirports'])->name('getAirports');
+
+    Route::post('/add/airport', [AirportController::class, 'addAirport'])->name('addAirport');
+
+    Route::post('/edit/airport/{airport?}', [AirportController::class, 'editAirport'])->name('editAirport');
+
+    Route::post('/delete/airport/{airport?}', [AirportController::class, 'deleteAirport'])->name('deleteAirport');
 
 });
