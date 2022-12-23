@@ -7,7 +7,7 @@
 @section('main')
     <style>
 
-        .form-control{
+        .form-control, .form-select{
             border-color: #265BE3;
         }
 
