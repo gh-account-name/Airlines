@@ -40,14 +40,20 @@
     <div class="searchTickets d-flex align-items-center">
         <div class="container">
             <h1 style="font-size: 4rem" class="mb-3 text-white">Поиск авиабилетов</h1>
-            <form action="" class="row">
+            <form action="{{route('flightsSearchResultPage')}}" class="row" method="get">
+                @csrf
+                @method('get')
                 <div class="mb-3 col-3">
                     <label for="from" class="form-label">откуда</label>
-                    <input type="text" class="form-control" id="from" name="from">
+                    <input type="text" class="form-control" id="from" name="from" required v-model='fromInput'>
+                </div>
+                <div class="p-0" style="width: 2rem">
+                    <label for="" class="form-label" style="opacity: 0">pad</label>
+                    <button type="button" class="btn p-0" @click='swapInputsValues'>&rarr;<br>&larr;</button>
                 </div>
                 <div class="mb-3 col-3">
                     <label for="to" class="form-label">куда</label>
-                    <input type="text" class="form-control" id="to" name="to">
+                    <input type="text" class="form-control" id="to" name="to" required v-model='toInput'>
                 </div>
                 <div class="mb-3 col-3">
                     <label for="date" class="form-label">когда</label>
@@ -64,7 +70,7 @@
             <h2 class="d-flex align-items-center justify-content-between mt-5">Популярные направления <span class="decorLine"></span></h2>
             <div class="row">
                 <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://realrussia.co.uk/portals/0/images/Moscow%20St%20Basils%20Cathedral.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
+                    <a href="#" class="direction d-block" style="background: url('https://realrussia.co.uk/portals/0/images/Moscow%20St%20Basils%20Cathedral.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem; filter: brightness(0.7);"></a>
                 </div>
                 <div class="col">
                     <a href="#" class="direction d-block" style="background: url('https://tripplanet.ru/wp-content/uploads/europe/russia/st-petersburg/saint-isaacs-cathedral.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
@@ -88,14 +94,57 @@
                     <td>дата и время вылета</td>
                     <td>цена билета</td>
                 </tr>
-                <tr style="line-height: 3rem">
-                    <td>Нижний Новгород</td>
-                    <td>Москва</td>
-                    <td>29.09.2022 года</td>
-                    <td>15000 руб.</td>
+                <tr style="line-height: 3rem" v-for='flight in flights'>
+                    <td>@{{flight.from_city.title}}</td>
+                    <td>@{{flight.to_city.title}}</td>
+                    <td>@{{flight.dateFrom}} года</td>
+                    <td>@{{Math.round((flight.airplane.price * (flight.percentPrice/100) + flight.airplane.price) * 100)/100}} руб.</td>
                 </tr>
             </table>
         </div>
     </div>
+
+    <script>
+        const AllFlights = {
+            data(){
+                return {
+                    flights:[],
+                }
+            }, 
+
+            methods:{
+                async getFlights(){
+                    const response = await fetch('{{route('getFlights')}}');
+                    const data = await response.json();
+                    this.flights = data.flights;
+                },
+            },
+
+            mounted(){
+                this.getFlights();
+            }
+        }
+
+        Vue.createApp(AllFlights).mount('.allFlights');
+
+        const SearchTickets = {
+            data(){
+                return {
+                    fromInput:'',
+                    toInput:'',
+                }
+            }, 
+
+            methods:{
+                swapInputsValues(){
+                    if (this.fromInput || this.toInput){
+                        [this.fromInput,this.toInput] = [this.toInput, this.fromInput];  
+                    } 
+                }
+            },
+        }
+
+        Vue.createApp(SearchTickets).mount('.searchTickets');
+    </script>
 
 @endsection

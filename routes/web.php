@@ -21,11 +21,13 @@ use Illuminate\Support\Facades\Route;
 
 // Страницы
 
-Route::get('/', [\App\Http\Controllers\PageController::class, 'mainPage'])->name('mainPage');
+Route::get('/', [PageController::class, 'mainPage'])->name('mainPage');
 
-Route::get('/auth', [\App\Http\Controllers\PageController::class, 'authPage'])->name('authPage');
+Route::get('/auth', [PageController::class, 'authPage'])->name('authPage');
 
-Route::get('/reg', [\App\Http\Controllers\PageController::class, 'regPage'])->name('regPage');
+Route::get('/reg', [PageController::class, 'regPage'])->name('regPage');
+
+Route::get('/search/flights', [PageController::class, 'flightsSearchResultPage'])->name('flightsSearchResultPage');
 
 
 // Функции
@@ -35,6 +37,8 @@ Route::post('/registration', [UserController::class, 'register'])->name('registe
 Route::post('/authorisation', [UserController::class, 'auth'])->name('auth');
 
 Route::get('/logout', [UserController::class,  'logout'])->name('logout');
+
+Route::get('/get/flights', [FlightController::class, 'getFlights'])->name('getFlights');
 
 
 // Миддлвар
@@ -85,8 +89,6 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
     Route::post('/edit/airport/{airport?}', [AirportController::class, 'editAirport'])->name('editAirport');
 
     Route::post('/delete/airport/{airport?}', [AirportController::class, 'deleteAirport'])->name('deleteAirport');
-
-    Route::get('/get/flights', [FlightController::class, 'getFlights'])->name('getFlights');
 
     Route::post('/add/flight', [FlightController::class, 'addFlight'])->name('addFlight');
 
