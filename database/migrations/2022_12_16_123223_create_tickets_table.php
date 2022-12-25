@@ -20,12 +20,12 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('fio');
             $table->date('birthday');
-            $table->string('passport')->unique();
-            $table->integer('certificate')->unique();
+            $table->string('passport')->nullable();
+            $table->integer('certificate')->nullable();
             $table->foreignIdFor(Flight::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('seat');
             $table->float('price');
-            $table->string('status');
+            $table->string('status')->default('оформлен');
             $table->timestamps();
         });
     }

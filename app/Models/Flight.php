@@ -20,4 +20,8 @@ class Flight extends Model
     public function to_city(){
         return $this->belongsTo(City::class);
     }
+
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
+    }
 }

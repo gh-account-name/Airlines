@@ -118,10 +118,10 @@
                         </div>
                         <div class="col-5 right-part">
                             <p class="row"><span class="col">Цена места:</span> <span class="col-5 text-end">@{{flight.airplane.price}} руб.</span></p>
-                            <p class="row"><span class="col">Количество свободных:</span> <span class="col-5 text-end">@{{flight.airplane.count_seats}} мест</span></p>  {{--!!!!--}}
+                            <p class="row"><span class="col">Количество свободных мест:</span> <span class="col-2 text-end">@{{flight.airplane.count_seats - flight.tickets_count}}</span></p>
                             <p class="row"><span class="col">Взимаемый процент:</span> <span class="col-5 text-end">@{{flight.percentPrice}}</span></p>                          {{--                                                 расчёт цены билета                       ↓ для округления до двух знаков--}}
                             <p class="row align-items-end fw-bold price"><span class="col-4 fs-5">Стоимость</span> <span class="col-8 fs-2 text-end" style="transform: translateY(15%)">@{{Math.round((flight.airplane.price * (flight.percentPrice/100) + flight.airplane.price) * 100)/100}} руб.</span></p>
-                            <a href="" class="btn btn-warning text-white" style="padding-left: 2rem; padding-right: 2rem">выбрать место</a>
+                            <a :href="`{{route('flightDetailsPage')}}/${flight.id}`" class="btn btn-warning text-white" style="padding-left: 2rem; padding-right: 2rem">выбрать место</a>
                         </div>
                     </div>
                 </div>

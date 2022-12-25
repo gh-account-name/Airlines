@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Flight;
 use App\Http\Controllers\Controller;
 use App\Models\City;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class FlightController extends Controller
 {
     public function getFlights(){
-        $flights = Flight::with('airplane','from_city', 'to_city')->get();
-        return response()->json(['flights'=>$flights], 200);
+        $flights_user = Flight::with('airplane','from_city', 'to_city')->where('status', 'готов')->withCount('tickets')->get();
+        $flights_admin = Flight::with('airplane','from_city', 'to_city')->withCount('tickets')->get();
+        return response()->json(['flights_user'=>$flights_user,'flights_admin'=>$flights_admin], 200);
     }
 
     public function addFlight(Request $request){
@@ -76,7 +78,8 @@ class FlightController extends Controller
             'percentPrice'=>['required', 'numeric', 'regex:/^\d*$|^\d*\.\d{1,2}$/'], 
             'airplane'=>['required'], 
             'from_airport'=>['required'], 
-            'to_airport'=>['required'], 
+            'to_airport'=>['required'],
+            'status'=>['required'],
         ],[
             'from_city.required' => 'Обязательное поле для заполнения',
             'to_city.required' => 'Обязательное поле для заполнения',
@@ -91,6 +94,7 @@ class FlightController extends Controller
             'airplane.required' => 'Обязательное поле для заполнения',
             'from_airport.required' => 'Обязательное поле для заполнения',
             'to_airport.required' => 'Обязательное поле для заполнения',
+            'status' => 'Обязательное поле для заполнения',
         ]);
 
         if($validation->fails()){
@@ -108,6 +112,17 @@ class FlightController extends Controller
         $flight->airplane_id = $request->airplane;
         $flight->from_airport_id = $request->from_airport;
         $flight->to_airport_id = $request->to_airport;
+
+        if($request->status == 'в полете'){
+            $tickets = Ticket::query()->where('flight_id', $flight->id)->get();
+            if($tickets){
+                foreach ($tickets as $ticket) {
+                    // $ticket->status = 'использован';
+                    $ticket->update(['status'=>'использован']); //по другому работает но ругается, не хочу чтобы ругался ‾\_(-_-)_/‾
+                }
+            }
+        }
+        $flight->status = $request->status;
         $flight->update();
 
         return response()->json('Рейс ' . $flight->id . ' ' . City::find($flight->from_city_id)->title . ' -> ' . City::find($flight->to_city_id)->title . ' обновлён', 200);

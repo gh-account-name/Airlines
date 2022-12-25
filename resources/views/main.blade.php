@@ -49,7 +49,7 @@
                 </div>
                 <div class="p-0" style="width: 2rem">
                     <label for="" class="form-label" style="opacity: 0">pad</label>
-                    <button type="button" class="btn p-0" @click='swapInputsValues'>&rarr;<br>&larr;</button>
+                    <button tabindex="-1" type="button" class="btn p-0" @click='swapInputsValues'>&rarr;<br>&larr;</button>
                 </div>
                 <div class="mb-3 col-3">
                     <label for="to" class="form-label">куда</label>
@@ -116,7 +116,7 @@
                 async getFlights(){
                     const response = await fetch('{{route('getFlights')}}');
                     const data = await response.json();
-                    this.flights = data.flights;
+                    this.flights = data.flights_user;
                 },
             },
 

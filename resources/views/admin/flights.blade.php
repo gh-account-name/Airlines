@@ -212,8 +212,9 @@
                 </div>
                 <div class="col-5 right-part">
                     <p class="row"><span class="col">Цена места:</span> <span class="col-5 text-end">@{{flight.airplane.price}} руб.</span></p>
-                    <p class="row"><span class="col">Количество свободных:</span> <span class="col-5 text-end">@{{flight.airplane.count_seats}} мест</span></p>  {{--!!!!--}}
-                    <p class="row"><span class="col">Взимаемый процент:</span> <span class="col-5 text-end">@{{flight.percentPrice}}</span></p>                          {{--                                                 расчёт цены билета                       ↓ для округления до двух знаков--}}
+                    <p class="row"><span class="col">Количество свободных мест:</span> <span class="col-2 text-end">@{{flight.airplane.count_seats - flight.tickets_count}}</span></p>
+                    <p class="row"><span class="col">Взимаемый процент:</span> <span class="col-5 text-end">@{{flight.percentPrice}}</span></p>                         
+                    <p class="row"><span class="col">Статус:</span> <span class="col-5 text-end">@{{flight.status}}</span></p>                                                                                                                                                                                 {{--                                                 расчёт цены билета                       ↓ для округления до двух знаков--}}
                     <p class="row align-items-end fw-bold price"><span class="col-4 fs-5">Стоимость</span> <span class="col-8 fs-2 text-end" style="transform: translateY(15%)">@{{Math.round((flight.airplane.price * (flight.percentPrice/100) + flight.airplane.price) * 100)/100}} руб.</span></p>
                     {{-- <a href="" class="btn btn-warning text-white" style="padding-left: 2rem; padding-right: 2rem">выбрать место</a> --}}
                     <div class="row">
@@ -345,6 +346,18 @@
                                                 </div>
                                             </div>
 
+                                            <div class="mb-4">
+                                                <select name="status" id="status" :class="errors.status ? 'is-invalid' : '' " class="form-select">
+                                                    <option value="готов" :selected="flight.status == 'готов'">Готов</option>
+                                                    <option value="в полете" :selected="flight.status == 'в полете'">В полете</option>
+                                                    <option value="прибыл" :selected="flight.status == 'прибыл'">Прибыл</option>
+                                                    <option value="ТО" :selected="flight.status == 'ТО'">ТО</option>
+                                                </select>
+                                                <div :class="errors.status ? 'invalid-feedback' : '' " v-for="error in errors.status">
+                                                    @{{error}}
+                                                </div>
+                                            </div>
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                                                 <button type="submit" class="btn btn-primary">Редактировать</button>
@@ -408,7 +421,7 @@
                 async getFlights(){
                     const response = await fetch('{{route('getFlights')}}');
                     const data = await response.json();
-                    this.flights = data.flights;
+                    this.flights = data.flights_admin;
                 }, 
 
                 async addFlight(){
@@ -457,7 +470,6 @@
                     }
 
                     if(response.status === 200){
-                        form.reset();
                         $(`#editModal_${id}`).modal('hide');
                         this.message = await response.json();
                         $('#messageModal').modal('show');

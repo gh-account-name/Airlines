@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    public $fillable = ['status']; //Прост чтобы на update не руглася 
+
     use HasFactory;
 }

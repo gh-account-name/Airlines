@@ -5,6 +5,7 @@ use App\Http\Controllers\AirportController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,10 @@ Route::get('/reg', [PageController::class, 'regPage'])->name('regPage');
 
 Route::get('/search/flights', [PageController::class, 'flightsSearchResultPage'])->name('flightsSearchResultPage');
 
+Route::get('/flight/{flight?}', [PageController::class, 'flightDetailsPage'])->name('flightDetailsPage');
+
+Route::get('/tickets', [PageController::class, 'myTicketsPage'])->name('myTicketsPage');
+
 
 // Функции
 
@@ -39,6 +44,8 @@ Route::post('/authorisation', [UserController::class, 'auth'])->name('auth');
 Route::get('/logout', [UserController::class,  'logout'])->name('logout');
 
 Route::get('/get/flights', [FlightController::class, 'getFlights'])->name('getFlights');
+
+Route::post('/flight/buyTicket', [TicketController::class, 'buyTicket'])->name('buyTicket');
 
 
 // Миддлвар
