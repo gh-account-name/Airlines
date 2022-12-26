@@ -63,4 +63,9 @@ class TicketController extends Controller
 
         return redirect()->route('myTicketsPage');
     }
+
+    public function deleteTicket(Ticket $ticket){
+        $ticket->delete();
+        return redirect()->back();
+    }
 }

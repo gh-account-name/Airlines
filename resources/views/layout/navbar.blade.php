@@ -134,7 +134,7 @@
                                     Рейсы</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
+                                <a class="nav-link active" aria-current="page" href="{{route('ticketsPage')}}">
                                     <svg style="width: 30px" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M16.25 10.4167C16.25 9.86413 16.4695 9.33423 16.8602 8.94353C17.2509 8.55283 17.7808 8.33333 18.3334 8.33333V7.5C18.3334 4.16667 17.5 3.33333 14.1667 3.33333H5.83335C2.50002 3.33333 1.66669 4.16667 1.66669 7.5V7.91667C2.21922 7.91667 2.74913 8.13616 3.13983 8.52686C3.53053 8.91756 3.75002 9.44746 3.75002 10C3.75002 10.5525 3.53053 11.0824 3.13983 11.4731C2.74913 11.8638 2.21922 12.0833 1.66669 12.0833V12.5C1.66669 15.8333 2.50002 16.6667 5.83335 16.6667H14.1667C17.5 16.6667 18.3334 15.8333 18.3334 12.5C17.7808 12.5 17.2509 12.2805 16.8602 11.8898C16.4695 11.4991 16.25 10.9692 16.25 10.4167Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M8.33331 3.33333V16.6667" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>

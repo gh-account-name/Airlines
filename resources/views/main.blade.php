@@ -8,7 +8,7 @@
     <style>
         .searchTickets{
             background: linear-gradient(89.28deg, #2A27CB 3.49%, #265BE3 45.04%, #4BC4F9 93.82%);
-            height: 70vh;
+            min-height: 70vh;
             color: white;
         }
 
@@ -35,9 +35,67 @@
             background-color: #265BE3;
             width: 50%;
         }
+
+        @media(max-width:991px){
+
+            form>div{
+                width: 100% !important;
+            }
+
+            form>.p-0>button{
+                width: 25% !important;
+                height: 50px !important;
+            }
+
+            form>.p-0>label{
+                display: none;
+            }
+
+            form>.p-0{
+                display:  flex;
+                justify-content: center;
+                height: 50px !important;
+            }
+
+            form input{
+                font-size: 1.5rem !important;
+            }
+
+            form .btn-warning{
+                width: 50% !important;
+                font-size: 1.5rem !important;
+                margin-top: 1rem !important;
+                margin: 1rem auto 0 auto !important;
+            }
+
+            .popularDirections  .col-3{
+                width: 50% !important;
+                margin-top: 1.5rem !important; 
+            }
+
+            .allFlights{
+                font-size: 0.7rem;
+            }
+        }
+
+         @media(max-width:420px){
+
+            .searchTickets h1{
+                font-size: 3rem !important;
+            }
+
+            .popularDirections  .col-3{
+                width: 100% !important;
+                /* margin-top: 1.5rem !important;  */
+            }
+
+            .allFlights{
+                font-size: 0.5rem;
+            }
+        }
     </style>
 
-    <div class="searchTickets d-flex align-items-center">
+    <div class="searchTickets d-flex align-items-center pb-5">
         <div class="container">
             <h1 style="font-size: 4rem" class="mb-3 text-white">Поиск авиабилетов</h1>
             <form action="{{route('flightsSearchResultPage')}}" class="row" method="get">
@@ -69,18 +127,12 @@
         <div class="container">
             <h2 class="d-flex align-items-center justify-content-between mt-5">Популярные направления <span class="decorLine"></span></h2>
             <div class="row">
-                <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://realrussia.co.uk/portals/0/images/Moscow%20St%20Basils%20Cathedral.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem; filter: brightness(0.7);"></a>
-                </div>
-                <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://tripplanet.ru/wp-content/uploads/europe/russia/st-petersburg/saint-isaacs-cathedral.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
-                </div>
-                <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://planetofhotels.com/guide/sites/default/files/styles/node__blog_post__bp_banner/public/2021-06/Central-District-of-Sochi.jpeg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
-                </div>
-                <div class="col">
-                    <a href="#" class="direction d-block" style="background: url('https://upload.wikimedia.org/wikipedia/commons/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg') no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem;"></a>
-                </div>
+                @foreach ($popular_directions as $popular_direction)
+                  <div class="col-3 position-relative">
+                    <div class="direction d-block" style="background: url({{asset($popular_direction->img)}}) no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem; filter: brightness(0.7);"></div>
+                    <h1 class="text-white position-absolute fw-bold" style="font-size: 2rem; bottom: 8%; left:10%">@php echo str_replace(' ', '<br>',$popular_direction->title) @endphp</h1>
+                </div>  
+                @endforeach
             </div>
         </div>
     </div>

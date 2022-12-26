@@ -25,7 +25,7 @@
             </div>
           </div>
 
-        <h2 class="text-center m-5 col-12">Города <button type="button" class="btn text-primary fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#addModal">+</button></h2>
+        <h2 class="text-center m-5">Города <button type="button" class="btn text-primary fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#addModal">+</button></h2>
 
         {{-- Модальное окно для добавления --}}
         <div class="modal fade" id="addModal" tabindex="-1">

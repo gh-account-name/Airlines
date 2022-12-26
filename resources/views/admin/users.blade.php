@@ -25,7 +25,7 @@
             </div>
           </div>
 
-        <h2 class="text-center m-5 col-12">Пользователи</h2>
+        <h2 class="text-center m-5">Пользователи</h2>
 
         <table class="table">
             <thead>

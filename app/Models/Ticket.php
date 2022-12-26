@@ -10,4 +10,9 @@ class Ticket extends Model
     public $fillable = ['status']; //Прост чтобы на update не руглася 
 
     use HasFactory;
+
+    public function flight(){
+        return $this->belongsTo(Flight::class);
+    }
+
 }

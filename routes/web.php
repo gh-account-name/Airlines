@@ -47,6 +47,9 @@ Route::get('/get/flights', [FlightController::class, 'getFlights'])->name('getFl
 
 Route::post('/flight/buyTicket', [TicketController::class, 'buyTicket'])->name('buyTicket');
 
+Route::post('/delete/ticket/{ticket?}', [TicketController::class, 'deleteTicket'])->name('deleteTicket');
+
+
 
 // Миддлвар
 
@@ -63,6 +66,8 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
     Route::get('/airports', [PageController::class, 'airportsPage'])->name('airportsPage');
 
     Route::get('/flights', [PageController::class, 'flightsPage'])->name('flightsPage');
+
+    Route::get('/tickets', [PageController::class, 'ticketsPage'])->name('ticketsPage');
 
 
     // Функции

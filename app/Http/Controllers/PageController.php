@@ -5,17 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Flight;
-use App\Models\Seat;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Expr\Cast\Object_;
-use PhpParser\Node\Expr\Empty_;
+use Illuminate\Support\Facades\DB;
+use Nette\Utils\Arrays;
+use PhpParser\Node\Expr\Cast\Array_;
 
 class PageController extends Controller
 {
     public function mainPage(){
-        return view('main');
+        $popular_directions = Ticket::query()
+            ->select('cities.title', 'cities.img', DB::raw('count(tickets.flight_id) as count_tickets'))
+            ->join('flights', 'flights.id', 'tickets.flight_id')
+            ->join('cities', 'cities.id','flights.to_city_id')
+            ->groupBy('flights.to_city_id')
+            ->orderByDesc('count_tickets')
+            ->limit(4)
+            ->get();
+        return view('main', ['popular_directions'=>$popular_directions]);
     }
 
     public function authPage(){
@@ -79,7 +87,7 @@ class PageController extends Controller
 
     public function flightDetailsPage(Flight $flight){
         $occupiedSeats = [];
-        $tickets = Ticket::query()->where('flight_id', $flight->id)->get();
+        $tickets = Ticket::query()->where('flight_id', $flight->id)->where('status', 'оформлен')->get();
         if ($tickets){
             foreach ($tickets as $ticket) {
                 array_push($occupiedSeats, $ticket->seat);
@@ -91,6 +99,19 @@ class PageController extends Controller
 
     public function myTicketsPage(){
         $tickets = Ticket::query()->where('user_id', Auth::id())->get();
-        return view('user.tickets', ['tickets'=>$tickets]);
+        $flights = [];
+        foreach ($tickets as $ticket) {
+            array_push($flights, Flight::query()->where('id', $ticket->flight_id)->with('airplane','from_city', 'to_city')->first());
+        }
+        return view('user.tickets', ['tickets'=>$tickets, 'flights'=>$flights]);
+    }
+
+    public function ticketsPage(){
+        $tickets = Ticket::all();
+        $flights = [];
+        foreach ($tickets as $ticket) {
+            array_push($flights, Flight::query()->where('id', $ticket->flight_id)->with('airplane','from_city', 'to_city')->first());
+        }
+        return view('admin.tickets', ['tickets'=>$tickets, 'flights'=>$flights]);
     }
 }

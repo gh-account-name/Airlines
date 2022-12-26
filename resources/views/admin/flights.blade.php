@@ -68,7 +68,7 @@
             </div>
           </div>
 
-        <h2 class="text-center m-5 col-12">Рейсы <button type="button" class="btn text-primary fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#addModal" @click='clearFlightData'>+</button></h2>
+        <h2 class="text-center m-5">Рейсы <button type="button" class="btn text-primary fw-bold fs-5" data-bs-toggle="modal" data-bs-target="#addModal" @click='clearFlightData'>+</button></h2>
 
         {{-- Модальное окно для добавления --}}
         <div class="modal fade" id="addModal" tabindex="-1">

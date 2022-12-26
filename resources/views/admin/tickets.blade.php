@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('title')
-    Мои билеты
+    Билеты
 @endsection
 
 @section('main')
@@ -70,11 +70,20 @@
     </style>
     <div class="container" id="ticketsPage">
 
-        <h2 class="text-center m-5">Мои билеты</h2>
+        <h2 class="text-center m-5">Билеты</h2>
 
         <div class="row mt-5">
+            <div class="filters col-3 mb-5">
+                <h4>Фильтры</h4>
+                <h5 class="mt-5 mb-3">Статус</h5>
+                <select v-model='status' class="form-select w-75">
+                    <option value="">Все</option>
+                    <option value="оформлен">Оформлен</option>
+                    <option value="использован">Использован</option>
+                </select>
+            </div>
             <div class="flights col-9" style="margin: 0 auto">
-                <div class="row mb-5" v-for='(ticket, index) in mixArrays'>
+                <div class="row mb-5" v-for='(ticket, index) in filterTickets'>
                     <div class="col-7 p-0 left-part" style="border-right: #265BE3 2px solid">
                         <div class="blue-top d-flex align-items-center p-3 mb-4" style="background-color: #265BE3">
                             <b style="width: 5rem" class="text-white">@{{ticket.flight.airplane.title}}</b>
@@ -105,22 +114,6 @@
                         <p class="row"><span class="col">Статус рейса:</span> <span class="col-5 text-end">@{{ticket.flight.status}}</span></p>
                         <p class="row"><span class="col">Статус билета:</span> <span class="col-5 text-end">@{{ticket.status}}</span></p>                                                                 {{--                                                 расчёт цены билета                       ↓ для округления до двух знаков--}}
                         <p class="row align-items-end fw-bold price"><span class="col-4 fs-5">Стоимость</span> <span class="col-8 fs-2 text-end" style="transform: translateY(15%)">@{{Math.round((ticket.flight.airplane.price * (ticket.flight.percentPrice/100) + ticket.flight.airplane.price) * 100)/100}} руб.</span></p>
-                        <button class="btn btn-danger" type="button" data-bs-toggle="modal" :data-bs-target="`#deleteModal_${ticket.id}`">Отказаться</button>
-
-                        {{-- Модальное окно для подтверждения удаления --}}
-                        <div class="modal fade" tabindex="-1" :id="`deleteModal_${ticket.id}`">
-                            <div class="modal-dialog modal-dialog-centered">
-                              <div class="modal-content">
-                                <div class="modal-body">
-                                  <h3 class="text-danger">Вы действительно хотите отказаться от билета?<br>В случае если он не был использован, уплаченная стоимость возвращена не будет.</h3>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                                  <button type="button" class="btn btn-danger" @click='deleteTicket(ticket.id)'>Удалить</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
                     </div>
                 </div>
             </div>
@@ -139,21 +132,6 @@
 
                     months:['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
                 }
-            },
-
-            methods:{
-              async deleteTicket(id){
-                    const response = await fetch(`{{route('deleteTicket')}}/${id}`, {
-                        method:'post',
-                        headers:{
-                            'X-CSRF-TOKEN':'{{csrf_token()}}'
-                        }
-                    });
-
-                    if(response.status === 200){
-                        window.location = response.url;
-                    }
-              },
             },
 
             computed:{
