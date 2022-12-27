@@ -6,6 +6,10 @@
 
 @section('main')
     <style>
+        .invalid-feedback{
+            font-size: 1rem;
+        }
+
         @media(max-width:991px){
             .user-data>div{
                 width: 100%;
@@ -51,7 +55,7 @@
                 </div>
                 <div class="row">
                     <button data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-warning text-white">Изменить данные</button>
-                        
+
                         {{-- Модальное окно для редактирования --}}
                         <div class="modal fade" id="editModal" tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered">
@@ -60,8 +64,8 @@
                                 <h3 class="modal-title" id="addModalLabel">Редактировать данные</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="col-12" method="post" enctype="multipart/form-data" id="editForm" @submit.prevent = 'editUser({{Auth::id()}})'>
-            
+                                    <form class="col-12" method="post" id="editForm" @submit.prevent = 'editUser({{Auth::id()}})'>
+
                                         <div class="mb-4">
                                             <input type="text" class="form-control" id="fio" name="fio" placeholder="ФИО" :class="errors.fio ? 'is-invalid' : '' " value="{{Auth::user()->fio}}">
                                             <div :class="errors.fio ? 'invalid-feedback' : '' " v-for="error in errors.fio">
@@ -100,14 +104,14 @@
                                             </div>
                                         </div>
                                         <div class="mb-4">
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="старый пароль" :class="errors.password ? 'is-invalid' : '' ">
-                                            <div :class="errors.password ? 'invalid-feedback' : '' " v-for="error in errors.password">
+                                            <input type="password" class="form-control" id="old_password" name="old_password" placeholder="старый пароль" :class="errors.old_password ? 'is-invalid' : '' ">
+                                            <div :class="errors.old_password ? 'invalid-feedback' : '' " v-for="error in errors.old_password">
                                                 @{{error}}
                                             </div>
                                         </div>
                                         <div class="mb-4">
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="новый пароль" :class="errors.password ? 'is-invalid' : '' ">
-                                            <div :class="errors.password ? 'invalid-feedback' : '' " v-for="error in errors.password">
+                                            <input type="password" class="form-control" id="new_password" name="new_password" placeholder="новый пароль" :class="errors.new_password ? 'is-invalid' : '' ">
+                                            <div :class="errors.new_password ? 'invalid-feedback' : '' " v-for="error in errors.new_password">
                                                 @{{error}}
                                             </div>
                                         </div>
@@ -139,7 +143,7 @@
                 async editUser(id){
                     const form = $('#editForm')[0];
                     const form_data = new FormData(form);
-                    const response = await fetch(`{{route('editUser')}}/${id}`, {
+                    const response = await fetch(`{{route('editUserData')}}/${id}`, {
                         method:'post',
                         headers:{
                             'X-CSRF-TOKEN':'{{csrf_token()}}'
@@ -158,7 +162,7 @@
                         window.location = response.url;
                     }
                 },
-                
+
             },
 
         }

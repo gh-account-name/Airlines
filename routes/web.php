@@ -51,7 +51,7 @@ Route::post('/flight/buyTicket', [TicketController::class, 'buyTicket'])->name('
 
 Route::post('/delete/ticket/{ticket?}', [TicketController::class, 'deleteTicket'])->name('deleteTicket');
 
-Route::post('/editUser/{user?}', [UserController::class, 'editUserData'])->name('editUserData');
+Route::post('/editUser/{user?}', [UserController::class, 'userDataEdit'])->name('editUserData');
 
 
 // Миддлвар
@@ -84,7 +84,7 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
     Route::post('/delete/city/{city?}', [CityController::class, 'deleteCity'])->name('deleteCity');
 
     Route::get('/get/airplanes', [AirplaneController::class, 'getAirplanes'])->name('getAirplanes');
-    
+
     Route::post('/add/airplane', [AirplaneController::class, 'addAirplane'])->name('addAirplane');
 
     Route::post('/edit/airplane/{airplane?}', [AirplaneController::class, 'editAirplane'])->name('editAirplane');
@@ -96,7 +96,7 @@ Route::group(['middleware'=>['auth', 'admin'], 'prefix'=>'admin'], function(){
     Route::post('/edit/user/{user?}', [UserController::class, 'editUser'])->name('editUser');
 
     Route::post('/delete/user/{user?}', [UserController::class, 'deleteUser'])->name('deleteUser');
-    
+
     Route::get('/get/airports', [AirportController::class, 'getAirports'])->name('getAirports');
 
     Route::post('/add/airport', [AirportController::class, 'addAirport'])->name('addAirport');

@@ -70,7 +70,7 @@
 
             .popularDirections  .col-3{
                 width: 50% !important;
-                margin-top: 1.5rem !important; 
+                margin-top: 1.5rem !important;
             }
 
             .allFlights{
@@ -129,9 +129,9 @@
             <div class="row">
                 @foreach ($popular_directions as $popular_direction)
                   <div class="col-3 position-relative">
-                    <div class="direction d-block" style="background: url({{asset($popular_direction->img)}}) no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem; filter: brightness(0.7);"></div>
+                    <div class="direction d-block" style="background: url({{asset('/public/'.$popular_direction->img)}}) no-repeat center; background-size:cover; height:21rem; border-radius:0.625rem; filter: brightness(0.7);"></div>
                     <h1 class="text-white position-absolute fw-bold" style="font-size: 2rem; bottom: 8%; left:10%">@php echo str_replace(' ', '<br>',$popular_direction->title) @endphp</h1>
-                </div>  
+                </div>
                 @endforeach
             </div>
         </div>
@@ -162,7 +162,7 @@
                 return {
                     flights:[],
                 }
-            }, 
+            },
 
             methods:{
                 async getFlights(){
@@ -185,18 +185,19 @@
                     fromInput:'',
                     toInput:'',
                 }
-            }, 
+            },
 
             methods:{
                 swapInputsValues(){
                     if (this.fromInput || this.toInput){
-                        [this.fromInput,this.toInput] = [this.toInput, this.fromInput];  
-                    } 
+                        [this.fromInput,this.toInput] = [this.toInput, this.fromInput];
+                    }
                 }
             },
         }
 
         Vue.createApp(SearchTickets).mount('.searchTickets');
+
     </script>
 
 @endsection

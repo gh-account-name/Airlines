@@ -21,7 +21,7 @@
             }
 
             .left-part{
-                border-right: none !important; 
+                border-right: none !important;
             }
 
             .right-part{
@@ -85,10 +85,10 @@
             <div class="flights col-9" style="margin: 0 auto">
                 <div class="row mb-5" v-for='(ticket, index) in filterTickets'>
                     <div class="col-7 p-0 left-part" style="border-right: #265BE3 2px solid">
-                        <div class="blue-top d-flex align-items-center p-3 mb-4" style="background-color: #265BE3">
+                        <a :href="`{{route('flightDetailsPage')}}/${ticket.flight.id}`" class="blue-top d-flex text-decoration-none align-items-center p-3 mb-4" style="background-color: #265BE3">
                             <b style="width: 5rem" class="text-white">@{{ticket.flight.airplane.title}}</b>
                             <p class="m-0 row w-100 text-white"><span class="col">@{{ticket.flight.from_city.title}}</span> <span class="col-3 arrow">&rarr;</span> <span class="col">@{{ticket.flight.to_city.title}}</span></p>
-                        </div>
+                        </a>
                         <div class="time row">
                             <div class="col">
                                 <p>@{{ticket.flight.dateFrom.slice(8,10)}} @{{months[Number(ticket.flight.dateFrom.slice(5,7))-1]}} @{{ticket.flight.dateFrom.slice(0,4)}}</p>
@@ -150,7 +150,7 @@
                     return this.tickets
                 }
 
-            }, 
+            },
         }
 
         Vue.createApp(Tickets).mount('#ticketsPage');

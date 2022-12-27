@@ -156,7 +156,7 @@ class UserController extends Controller
         $user->login = $request->login;
 
         if($request->password){
-           $user->password = md5($request->password); 
+           $user->password = md5($request->password);
         }
 
         $user->update();
@@ -169,7 +169,7 @@ class UserController extends Controller
         return response()->json('Пользователь ' . $user->fio . ' удалён', 200);
     }
 
-    public function editUserData(Request $request, User $user){
+    public  function userDataEdit(Request $request, User $user){
         $validation = Validator::make($request->all(),[
             'fio'=> ['required', 'regex:/^(([А-ЯЁ][а-яё]+[-\s][А-ЯЁ][а-яё]+)|([А-ЯЁ][а-яё]+[-\s][А-ЯЁ][а-яё]+[-\s][А-ЯЁ][а-яё]+))$/u'],
             'birthday'=> ['required'],
@@ -177,7 +177,8 @@ class UserController extends Controller
             'login'=>['required', 'regex:/^[A-Za-z0-9-]+$/u'],
             'phone'=>['required', 'numeric'],
             'email'=>['required', 'email:frc'],
-            'password'=>['min:6', 'nullable'],
+            'old_password'=>['min:6', 'required_unless:new_password,null', 'nullable'],
+            'new_password'=>['min:6', 'required_unless:old_password,null', 'nullable']
         ], [
             'fio.required'=>'Это обязательное поле',
             'fio.regex'=>'Разрешенные символы: кириллица, пробел и тире',
@@ -190,8 +191,12 @@ class UserController extends Controller
             'phone.numeric'=>'Допускаются только цифры',
             'email.required'=>'Это обязательное поле',
             'email.email'=>'Пример заполнения: example@email.com',
-            'password.min'=>'Минимальная длина пароля: 6 символов',
+            'old_password.min'=>'Минимальная длина пароля: 6 символов',
+            'old_password.required_unless'=>'Введите старый пароль',
+            'new_password.min'=>'Минимальная длина пароля: 6 символов',
+            'new_password.required_unless'=>'Введите новый пароль',
         ]);
+
 
         if($validation->fails()){
             return response()->json($validation->errors(), 403);
@@ -221,6 +226,13 @@ class UserController extends Controller
             return response()->json($validation->errors(), 403);
         }
 
+        if($request->new_password and  $request->old_password){
+            if (md5($request->old_password) != $user->password){
+                $validation->getMessageBag()->add('old_password', 'Неверный пароль');
+                return response()->json($validation->errors(), 403);
+            }
+        }
+
         $user->fio = $request->fio;
         $user->birthday = $request->birthday;
         $user->passport = $request->passport;
@@ -228,12 +240,12 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->login = $request->login;
 
-        if($request->password){
-           $user->password = md5($request->password); 
+        if($request->new_password and $request->old_password){
+            $user->password = md5($request->new_password);
         }
 
         $user->update();
 
-        return response()->json('Пользователь ' . $user->fio . ' обновлён', 200);
+        return redirect()->back();
     }
 }

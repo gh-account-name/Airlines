@@ -21,7 +21,7 @@
             }
 
             .left-part{
-                border-right: none !important; 
+                border-right: none !important;
             }
 
             .right-part{
@@ -80,7 +80,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="col-12" method="post" id="addForm" @submit.prevent = 'addFlight'>
-            
+
                         <div class="mb-4">
                             <select name="from_city" id="from_city" :class="errors.from_city ? 'is-invalid' : '' " class="form-select" v-model='from_city'>
                                 <option value="" selected>Город отправления</option>
@@ -190,10 +190,10 @@
         <div class="flights col-9" style="margin: 0 auto">
             <div class="row mb-5" v-for='flight in flights'>
                 <div class="col-7 p-0 left-part" style="border-right: #265BE3 2px solid">
-                    <div class="blue-top d-flex align-items-center p-3 mb-4" style="background-color: #265BE3">
+                    <a :href="`{{route('flightDetailsPage')}}/${flight.id}`" class="blue-top text-decoration-none d-flex align-items-center p-3 mb-4" style="background-color: #265BE3">
                         <b style="width: 5rem" class="text-white">@{{flight.airplane.title}}</b>
                         <p class="m-0 row w-100 text-white"><span class="col">@{{flight.from_city.title}}</span> <span class="col-3 arrow">&rarr;</span> <span class="col">@{{flight.to_city.title}}</span></p>
-                    </div>
+                    </a>
                     <div class="time row">
                         <div class="col">
                             <p>@{{flight.dateFrom.slice(8,10)}} @{{months[Number(flight.dateFrom.slice(5,7))-1]}} @{{flight.dateFrom.slice(0,4)}}</p>
@@ -213,7 +213,7 @@
                 <div class="col-5 right-part">
                     <p class="row"><span class="col">Цена места:</span> <span class="col-5 text-end">@{{flight.airplane.price}} руб.</span></p>
                     <p class="row"><span class="col">Количество свободных мест:</span> <span class="col-2 text-end">@{{flight.airplane.count_seats - flight.tickets_count}}</span></p>
-                    <p class="row"><span class="col">Взимаемый процент:</span> <span class="col-5 text-end">@{{flight.percentPrice}}</span></p>                         
+                    <p class="row"><span class="col">Взимаемый процент:</span> <span class="col-5 text-end">@{{flight.percentPrice}}</span></p>
                     <p class="row"><span class="col">Статус:</span> <span class="col-5 text-end">@{{flight.status}}</span></p>                                                                                                                                                                                 {{--                                                 расчёт цены билета                       ↓ для округления до двух знаков--}}
                     <p class="row align-items-end fw-bold price"><span class="col-4 fs-5">Стоимость</span> <span class="col-8 fs-2 text-end" style="transform: translateY(15%)">@{{Math.round((flight.airplane.price * (flight.percentPrice/100) + flight.airplane.price) * 100)/100}} руб.</span></p>
                     {{-- <a href="" class="btn btn-warning text-white" style="padding-left: 2rem; padding-right: 2rem">выбрать место</a> --}}
@@ -238,7 +238,7 @@
 
                         <div class="col">
                             <button data-bs-toggle="modal" :data-bs-target="`#editModal_${flight.id}`" class="btn btn-warning text-white" @click='pushFlightData(flight)'>Редактировать</button>
-                            
+
                             {{-- Модальное окно для редактирования --}}
                             <div class="modal fade" :id="`editModal_${flight.id}`" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -248,7 +248,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form class="col-12" method="post" enctype="multipart/form-data" :id="`editForm_${flight.id}`" @submit.prevent = 'editFlight(flight.id)'>
-                                            
+
                                             <div class="mb-4">
                                                 <select name="from_city" id="from_city" :class="errors.from_city ? 'is-invalid' : '' " class="form-select" v-model='from_city'>
                                                     <option value="" selected>Город отправления</option>
@@ -258,7 +258,7 @@
                                                     @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <select name="to_city" id="to_city" :class="errors.to_city ? 'is-invalid' : '' " class="form-select" v-model='to_city'>
                                                     <option value="" selected>Город назначения</option>
@@ -268,7 +268,7 @@
                                                     @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <label for="dateFrom" class="form-label">Дата отправления</label>
                                                 <input type="date" :class="errors.dateFrom ? 'is-invalid' : '' " class="form-control" id="dateFrom" name="dateFrom" v-model='dateFrom'>
@@ -276,7 +276,7 @@
                                                  @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <label for="dateTo" class="form-label">Дата прибытия</label>
                                                 <input type="date" :class="errors.dateTo ? 'is-invalid' : '' " class="form-control" id="dateTo" name="dateTo" v-model='dateTo'>
@@ -284,7 +284,7 @@
                                                  @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <label for="timeFrom" class="form-label">Время отправления</label>
                                                 <input type="time" :class="errors.timeFrom ? 'is-invalid' : '' " class="form-control" id="timeFrom" name="timeFrom" v-model='timeFrom'>
@@ -292,7 +292,7 @@
                                                  @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <label for="timeTo" class="form-label">Время прибытия</label>
                                                 <input type="time" :class="errors.timeTo ? 'is-invalid' : '' " class="form-control" id="timeTo" name="timeTo" v-model='timeTo'>
@@ -300,7 +300,7 @@
                                                  @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <label for="timeWay" class="form-label">Время в пути</label>
                                                 <input type="time" :class="errors.timeWay ? 'is-invalid' : '' " class="form-control" id="timeWay" name="timeWay" :value="countTimeWay">
@@ -308,14 +308,14 @@
                                                  @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <input type="text" :class="errors.percentPrice ? 'is-invalid' : '' " class="form-control" id="percentPrice" name="percentPrice" placeholder="Взимаемый процент" :value="flight.percentPrice">
                                                 <div :class="errors.percentPrice ? 'invalid-feedback' : '' " v-for="error in errors.percentPrice">
                                                  @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <select name="airplane" id="airplane" :class="errors.airplane ? 'is-invalid' : '' " class="form-select">
                                                     <option value="" selected>Самолёт</option>
@@ -325,7 +325,7 @@
                                                     @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <select name="from_airport" id="from_airport" :class="errors.from_airport ? 'is-invalid' : '' " class="form-select" v-model='from_airport'>
                                                     <option value="" selected>Аэропорт отправления</option>
@@ -335,7 +335,7 @@
                                                     @{{error}}
                                                 </div>
                                             </div>
-                    
+
                                             <div class="mb-4">
                                                 <select name="to_airport" id="to_airport" :class="errors.to_airport ? 'is-invalid' : '' " class="form-select" v-model='to_airport'>
                                                     <option value="" selected>Аэропорт прибытия</option>
@@ -404,25 +404,25 @@
                     const response = await fetch('{{route('getAirplanes')}}');
                     const data = await response.json();
                     this.airplanes = data.airplanes;
-                }, 
+                },
 
                 async getCities(){
                     const response = await fetch('{{route('getCities')}}');
                     const data = await response.json();
                     this.cities = data.cities;
-                }, 
+                },
 
                 async getAirports(){
                     const response = await fetch('{{route('getAirports')}}');
                     const data = await response.json();
                     this.airports = data.airports;
-                }, 
+                },
 
                 async getFlights(){
                     const response = await fetch('{{route('getFlights')}}');
                     const data = await response.json();
                     this.flights = data.flights_admin;
-                }, 
+                },
 
                 async addFlight(){
                     const form = $('#addForm')[0];
@@ -476,7 +476,7 @@
                         this.getFlights();
                     }
                 },
-                
+
                 async deleteFlight(id){
                     const response = await fetch(`{{route('deleteFlight')}}/${id}`, {
                         method:'post',
@@ -514,7 +514,7 @@
                     this.from_airport='';
                     this.to_airport='';
                 },
-                
+
             },
 
             mounted(){
@@ -535,7 +535,7 @@
                         let minsAmount = Math.abs(from - to) / 60000;
                         let hours = Math.floor(minsAmount/60);
                         let minutes = Math.round((minsAmount/60 - hours)*60);
-                        return new Date(0,0,0,hours,minutes).toLocaleTimeString().slice(0,-3); 
+                        return new Date(0,0,0,hours,minutes).toLocaleTimeString().slice(0,-3);
                     }
                 },
 
@@ -545,7 +545,7 @@
                     }
                     return [...this.airports];
                 },
-                
+
                 filterToAirports(){
                     if(this.to_city){
                         return [...this.airports].filter(airport=>airport.city_id == this.to_city);

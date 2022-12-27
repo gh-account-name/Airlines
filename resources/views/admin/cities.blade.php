@@ -37,14 +37,14 @@
                 </div>
                 <div class="modal-body">
                     <form class="col-12" method="post" enctype="multipart/form-data" id="addForm" @submit.prevent = 'addCity'>
-            
+
                         <div class="mb-4">
                             <input type="text" :class="errors.title ? 'is-invalid' : '' " class="form-control" id="title" name="title" placeholder="название">
                             <div :class="errors.title ? 'invalid-feedback' : '' " v-for="error in errors.title">
                                 @{{error}}
                             </div>
                         </div>
-            
+
                         <div class="mb-4">
                             <label for="img" class="form-label">Картинка</label>
                             <input type="file" :class="errors.img ? 'is-invalid' : '' " class="form-control" id="img" name="img">
@@ -75,7 +75,7 @@
                <tr v-for="(city, key) in cities">
                 <th scope="row">@{{key+1}}</th>
                 <td>@{{city.title}}</td>
-                <td><img height="150" :src="city.img" alt="city"></td>
+                <td><img height="150" :src="'/public/'+city.img" alt="city"></td>
                 <td>
                     <div class="d-flex">
                         <button class="btn btn-danger" type="button" data-bs-toggle="modal" :data-bs-target="`#deleteModal_${city.id}`">Удалить</button>
@@ -96,7 +96,7 @@
                           </div>
 
                         <button data-bs-toggle="modal" :data-bs-target="`#editModal_${city.id}`" class="btn btn-warning text-white" style="margin-left: 1rem">Редактировать</button>
-                        
+
                         {{-- Модальное окно для редактирования --}}
                         <div class="modal fade" :id="`editModal_${city.id}`" tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered">
@@ -106,14 +106,14 @@
                                 </div>
                                 <div class="modal-body">
                                     <form class="col-12" method="post" enctype="multipart/form-data" :id="`editForm_${city.id}`" @submit.prevent = 'editCity(city.id)'>
-            
+
                                         <div class="mb-4">
                                             <input type="text" :class="errors.title ? 'is-invalid' : '' " class="form-control" id="title" name="title" :value="city.title" placeholder="название">
                                             <div :class="errors.title ? 'invalid-feedback' : '' " v-for="error in errors.title">
                                              @{{error}}
                                             </div>
                                         </div>
-            
+
                                         <div class="mb-4">
                                             <label for="img" class="form-label">Картинка</label>
                                             <input type="file" :class="errors.img ? 'is-invalid' : '' " class="form-control" id="img" name="img">
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                 </td>
-              </tr>   
+              </tr>
             </tbody>
           </table>
     </div>
@@ -153,7 +153,7 @@
                     const response = await fetch('{{route('getCities')}}');
                     const data = await response.json();
                     this.cities = data.cities;
-                }, 
+                },
 
                 async addCity(){
                     const form = $('#addForm')[0];
@@ -208,7 +208,7 @@
                         this.getCities();
                     }
                 },
-                
+
                 async deleteCity(id){
                     const response = await fetch(`{{route('deleteCity')}}/${id}`, {
                         method:'post',
@@ -224,7 +224,7 @@
                         this.getCities();
                     }
                 },
-                
+
             },
 
             mounted(){
