@@ -114,4 +114,8 @@ class PageController extends Controller
         }
         return view('admin.tickets', ['tickets'=>$tickets, 'flights'=>$flights]);
     }
+
+    public function cabinetPage(){
+        return view('user.cabinet');
+    }
 }

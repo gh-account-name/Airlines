@@ -34,6 +34,8 @@ Route::get('/flight/{flight?}', [PageController::class, 'flightDetailsPage'])->n
 
 Route::get('/tickets', [PageController::class, 'myTicketsPage'])->name('myTicketsPage');
 
+Route::get('/cabinet', [PageController::class, 'cabinetPage'])->name('cabinetPage');
+
 
 // Функции
 
@@ -49,6 +51,7 @@ Route::post('/flight/buyTicket', [TicketController::class, 'buyTicket'])->name('
 
 Route::post('/delete/ticket/{ticket?}', [TicketController::class, 'deleteTicket'])->name('deleteTicket');
 
+Route::post('/editUser/{user?}', [UserController::class, 'editUserData'])->name('editUserData');
 
 
 // Миддлвар

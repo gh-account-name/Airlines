@@ -52,12 +52,12 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             @auth()
-                <div class="userIcon p-5 pb-0" style="display: flex; align-items: center; justify-content:flex-start;">
+                <a href="{{route('cabinetPage')}}" class="userIcon p-5 pb-0" style="display: flex; align-items: center; justify-content:flex-start; text-decoration: none">
                     <span class="d-flex justify-content-center align-items-center" style="background: white url('{{asset('public/storage/user-icon.png')}}') center no-repeat;background-size: cover; border-radius: 1000px; width: 60px; height: 60px;">
                         {{-- <img style="width: 100%;" src="{{asset('public\storage\user-icon.png')}}" alt="Avatar"> --}}
                     </span>
                     <p class="text-white h4" style="margin:0 0 0 1rem; font-weight: bold;">{{\Illuminate\Support\Facades\Auth::user()->login}}</p>
-                </div>
+                </a>
             @endauth
             <div class="offcanvas-header p-5">
                 <h5 class="offcanvas-title" style="cursor: pointer; color: white; font-weight: 700; font-size: 1.5rem" data-bs-dismiss="offcanvas" id="offcanvasNavbarLabel">Меню</h5>
