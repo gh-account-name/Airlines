@@ -211,6 +211,7 @@
                     </div>
                 </div>
                 <div class="col-5 right-part">
+                    <p class="row"><span class="col">Номер рейса:</span> <span class="col-5 text-end">@{{flight.id}}</span></p>
                     <p class="row"><span class="col">Цена места:</span> <span class="col-5 text-end">@{{flight.airplane.price}} руб.</span></p>
                     <p class="row"><span class="col">Количество свободных мест:</span> <span class="col-2 text-end">@{{flight.airplane.count_seats - flight.tickets_count}}</span></p>
                     <p class="row"><span class="col">Взимаемый процент:</span> <span class="col-5 text-end">@{{flight.percentPrice}}</span></p>

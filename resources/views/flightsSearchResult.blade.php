@@ -32,7 +32,7 @@
         }
 
         .left-part{
-            border-right: none !important; 
+            border-right: none !important;
         }
 
         .right-part{
@@ -88,7 +88,7 @@
                     <input v-model="minPrice" class="form-control col" type="number" placeholder="от" id='minPrice' name="minPrice" style="margin-right: 1rem">
                     <input v-model="maxPrice" class="form-control col" type="number" placeholder="до" id='maxPrice' name="maxPrice">
                 </div>
-            </div>  
+            </div>
             <div class="col-9">
                 <h2 class="d-flex align-items-center justify-content-between mt-5">Рейсы <span class="decorLine"></span></h2>
                 <p class="mt-5" v-if="filterByPrice.length != 0">По вашему запросу найдены следующие рейсы</p>
@@ -117,6 +117,7 @@
                             </div>
                         </div>
                         <div class="col-5 right-part">
+                            <p class="row"><span class="col">Номер рейса:</span> <span class="col-5 text-end">@{{flight.id}}</span></p>
                             <p class="row"><span class="col">Цена места:</span> <span class="col-5 text-end">@{{flight.airplane.price}} руб.</span></p>
                             <p class="row"><span class="col">Количество свободных мест:</span> <span class="col-2 text-end">@{{flight.airplane.count_seats - flight.tickets_count}}</span></p>
                             <p class="row"><span class="col">Взимаемый процент:</span> <span class="col-5 text-end">@{{flight.percentPrice}}</span></p>                          {{--                                                 расчёт цены билета                       ↓ для округления до двух знаков--}}
@@ -166,7 +167,7 @@
                 }
             }
         }
-        
+
         Vue.createApp(Flights).mount('#flightsSearchResultPage')
     </script>
 @endsection
